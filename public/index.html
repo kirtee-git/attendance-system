@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Attendance Management</title>
+<style>
+  body{font-family:system-ui,Arial,sans-serif;margin:0;background:#f4f6fb;color:#222}
+  header{background:#2d3a8c;color:#fff;padding:16px 24px}
+  main{max-width:1000px;margin:20px auto;padding:0 16px;display:grid;gap:20px}
+  section{background:#fff;border-radius:10px;padding:18px;box-shadow:0 1px 4px #0002}
+  h2{margin-top:0;font-size:18px}
+  form,.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  input,select,button{padding:8px 10px;border:1px solid #bbb;border-radius:6px;font-size:14px}
+  button{background:#2d3a8c;color:#fff;border:none;cursor:pointer}
+  button.sec{background:#777} button.del{background:#c0392b} button.edit{background:#e08e0b}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+  th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+  #msg{padding:10px;border-radius:6px;display:none}
+  .ok{background:#d4edda;color:#155724}.err{background:#f8d7da;color:#721c24}
+</style>
+</head>
+<body>
+<header><h1 style="margin:0;font-size:22px">Student Attendance Management System</h1></header>
+<main>
+  <div id="msg"></div>
+
+  <section>
+    <h2>Register / Update Student</h2>
+    <form id="studentForm">
+      <input id="sId" placeholder="Student ID *" required>
+      <input id="sName" placeholder="Name *" required>
+      <input id="sEmail" type="email" placeholder="Email">
+      <input id="sDept" placeholder="Department">
+      <input id="sYear" type="number" min="1" max="6" placeholder="Year">
+      <button type="submit">Save Student</button>
+      <button type="button" class="sec" onclick="resetStudentForm()">Clear</button>
+    </form>
+    <table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Dept</th><th>Year</th><th>Actions</th></tr></thead><tbody id="students"></tbody></table>
+  </section>
+
+  <section>
+    <h2>Mark / Update Attendance</h2>
+    <form id="attForm">
+      <input id="aId" placeholder="Student ID *" required>
+      <input id="aDate" type="date" required>
+      <select id="aStatus"><option>Present</option><option>Absent</option><option>Late</option></select>
+      <input id="aRemarks" placeholder="Remarks">
+      <button type="submit">Save Attendance</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Search Attendance</h2>
+    <div class="row">
+      <input id="qId" placeholder="Student ID">
+      <input id="qDate" type="date">
+      <button onclick="loadAttendance()">Search</button>
+      <button class="sec" onclick="qId.value='';qDate.value='';loadAttendance()">Show All</button>
+    </div>
+    <table><thead><tr><th>Student ID</th><th>Name</th><th>Date</th><th>Status</th><th>Remarks</th><th>Actions</th></tr></thead><tbody id="attendance"></tbody></table>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
